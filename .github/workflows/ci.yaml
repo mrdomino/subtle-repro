@@ -1,0 +1,21 @@
+on:
+  pull_request:
+  push:
+
+jobs:
+  run:
+    name: Run
+    strategy:
+      matrix:
+        runner: [ubuntu-latest, ubuntu-24.04-arm]
+        toolchain: [1.85, 1.91]
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+    - uses: actions/checkout@v6
+    - run: rustup install ${{ matrix.toolchain }} --profile minimal && rustup default ${{ matrix.toolchain }}
+    - uses: mrdomino/rust-cache@v2
+      with:
+        key: ${{ env.toolchain }}
+    - run: cargo build --release
+    - run: timeout 30 cargo run --release
