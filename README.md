@@ -1,0 +1,1 @@
+This is a reproduction for rust-lang/rust#149522. If compiled without optimizations, it runs to successful completion on all platforms. If compiled with `--release`, it hangs on linux-aarch64 in rustc versions >=1.87.
