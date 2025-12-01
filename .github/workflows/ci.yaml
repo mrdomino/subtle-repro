@@ -18,4 +18,4 @@ jobs:
       with:
         key: ${{ env.toolchain }}
     - run: cargo build --release
-    - run: timeout 30 cargo run --release
+    - run: perl -e 'alarm shift; exec @ARGV' 30 cargo run --release
