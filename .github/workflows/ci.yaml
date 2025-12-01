@@ -1,0 +1,21 @@
+on:
+  pull_request:
+  push:
+
+jobs:
+  run:
+    name: Run
+    strategy:
+      matrix:
+        runner: [macos-latest, ubuntu-latest, ubuntu-24.04-arm]
+        toolchain: [1.86, 1.87, 1.91, nightly]
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+    - uses: actions/checkout@v6
+    - run: rustup install ${{ matrix.toolchain }} --profile minimal && rustup default ${{ matrix.toolchain }}
+    - uses: mrdomino/rust-cache@v2
+      with:
+        key: ${{ env.toolchain }}
+    - run: cargo build --release
+    - run: perl -e 'alarm shift; exec @ARGV' 30 cargo run --release
