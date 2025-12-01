@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         runner: [macos-latest, ubuntu-latest, ubuntu-24.04-arm]
-        toolchain: [1.86, 1.87, 1.91, nightly]
+        toolchain: [1.88, 1.89, 1.90, 1.91, nightly]
     runs-on: ${{ matrix.runner }}
 
     steps:
