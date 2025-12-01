@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-rand_chacha = "0.9.0"
-rand_core = "0.9.3"
-subtle = "2.6.1"
+chacha20 = { version = "0.10.0-rc.2", features = ["rand_core", "rng"] }
+crypto-bigint = { version = "0.7.0-rc.10", features = ["rand_core"], default-features = false }
+rand_core = "0.10.0-rc-1"
